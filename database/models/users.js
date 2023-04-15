@@ -1,14 +1,13 @@
 
 module.exports = (sequelize, DataTypes) => {
-    const Users = sequelize.define(
-      'users',
-      {
-        id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true
-        },
-
+  const Users = sequelize.define(
+    'users',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
       name: {
         type: DataTypes.STRING
       },
@@ -22,18 +21,26 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         type: DataTypes.DATE
       },
+      deleted_at: {
+        allowNull: true,
+        type: DataTypes.DATE
+      },
       updated_at: {
         allowNull: true,
         type: DataTypes.DATE
       }
 
-      },
-      {
-        freezeTableName: true,
-        timestamps: false
-      },
-    );
-   
-    return Users;
-  };
+    },
+    {
+      freezeTableName: true,
+      timestamps: true,
+      paranoid: true,
+      deletedAt: 'deleted_at',
+      updatedAt: 'updated_at',
+      createdAt: 'created_at'
+    },
+  );
+
+  return Users;
+};
 
