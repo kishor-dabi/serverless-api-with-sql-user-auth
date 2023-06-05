@@ -21,12 +21,18 @@ const generatePolicy = (principalId, effect, resource) => {
 module.exports.auth = (event, context, callback) => {
 
   // check header or url parameters or post parameters for token
-  const token = event.authorizationToken;
+  let token = event.authorizationToken;
 
-  console.log(token, event);
-
-  if (!token)
+  let tokenData = token.split(" ")
+  console.log(tokenData);
+  if (tokenData.length > 0) {
+    token = tokenData[1]
+  }else{
     return callback(null, 'Unauthorized');
+  }
+
+  // if (!token)
+  //   return callback(null, 'Unauthorized');
 
   // verifies secret and checks exp
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {

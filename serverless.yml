@@ -53,6 +53,70 @@ functions:
           path: users
           method: get
           cors: true
+          authorizer: verify-token
+ 
+  getQuiz:
+    handler: controllers/QuizHandler.getQuiz
+    events:
+      - http:
+          path: quiz
+          method: get
+          cors: true
+          authorizer: verify-token
+ 
+  creteQuiz:
+    handler: controllers/QuizHandler.createQuiz
+    events:
+      - http:
+          path: quiz
+          method: post
+          cors: true
+          authorizer: verify-token
+ 
+  creteQuestion:
+    handler: controllers/QuestionHandler.createQuestion
+    events:
+      - http:
+          path: question
+          method: post
+          cors: true
+          authorizer: verify-token
+  
+  saveQuizQuestion:
+    handler: controllers/QuizHandler.saveQuizAnswer
+    events:
+      - http:
+          path: quiz/answer
+          method: post
+          cors: true
+          authorizer: verify-token
+  
+  startQuiz:
+    handler: controllers/QuizHandler.startQuiz
+    events:
+      - http:
+          path: quiz/start/{id}
+          method: get
+          cors: true
+          authorizer: verify-token
+          request: 
+            parameters: 
+              paths: 
+                id: true
+
+  # getQuestion:
+  #   handler: controllers/QuestionHandler.getQuestion
+  #   events:
+  #     - http:
+  #         path: question/{id}
+  #         method: get
+  #         cors: true
+  #         authorizer: verify-token
+  #         request: 
+  #           parameters: 
+  #             paths: 
+  #               id: true
+
 
 plugins:
   - serverless-offline

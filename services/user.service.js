@@ -39,7 +39,7 @@ const login =  async (eventBody) => {
   
     let validatePassword = await comparePassword(eventBody.password, existing.password, existing)
   
-    return { auth: true, token: validatePassword }
+    return { auth: true, accessToken: validatePassword, refreshToken: "", user:existing }
   }
   
   function comparePassword(eventPassword, userPassword, user) {

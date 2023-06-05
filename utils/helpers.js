@@ -6,6 +6,17 @@ const generateToken = async (data) => {
     });
 }
 
+const generateErrorResponse = (data) =>{
+    return {
+        error: true,
+        data
+    }
+}
+
+const successResponse = (data) =>{ return {data}}
+
 module.exports = {
-    generateToken
+    generateToken,
+    generateErrorResponse,
+    successResponse
 }
